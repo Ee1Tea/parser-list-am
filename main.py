@@ -3,8 +3,6 @@ from selenium.webdriver.common.by import By
 import time
 import csv
 
-from urllib3.util import url
-
 # Настройки парсинга
 BASE_URL = "https://www.list.am/ru/category/452/{page}?gl=1" # Исследуемая стартовая страница
 PAGES = 3 # Количество исследуемых страниц
