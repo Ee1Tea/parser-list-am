@@ -61,3 +61,16 @@ for _, row in top_expensive.iterrows():
     print(f"{row['price_num']:>10,} ֏  {row['title'][:120]}")
     print(f"Ссылка на объявление: {row['link']} | Состояние: {row['condition']} | Локация: {row['location']}")
 print()
+
+print("РАСПРЕДЕЛЕНИЕ ПО ЛОКАЦИЯМ")
+location_counts = df["location"].value_counts()
+for loc, count in location_counts.items():
+    print(f"{loc:<30} {count}")
+print()
+
+print("РАСПРЕДЕЛЕНИЕ ПО СОСТОЯНИЮ")
+condition_counts = df["condition"].value_counts()
+for cond, count in condition_counts.items():
+    print(f"{cond:<30} {count}")
+print()
+
