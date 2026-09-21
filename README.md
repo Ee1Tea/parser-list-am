@@ -95,13 +95,13 @@
 | EVGA RTX 3090 ftw3 ultra | 425,000֏ | Использованное | Малатия-Себастия | https://www.list.am/ru/item/24242107 |
 
 ## 📊 Пример вывода `price_hist.png`
-![price_hist.png](charts/price_hist.png)
+![price_hist.png](examples/price_hist.png)
 
 ## 📊 Пример вывода `price_ranges.png`
-![price_ranges.png](charts/price_ranges.png)
+![price_ranges.png](examples/price_ranges.png)
 
 ## 📊 Пример вывода `condition_pie.png`
-![condition_pie.png](charts/condition_pie.png)
+![condition_pie.png](examples/condition_pie.png)
 
 ## 🗺 Планы по развитию
 
