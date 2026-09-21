@@ -57,8 +57,8 @@ for _, row in top_expensive.iterrows():
 print()
 
 print(f"📊 ТОП {TOP_N} САМЫХ ДЕШЁВЫХ ОБЪЯВЛЕНИЙ")
-top_expensive = df.nsmallest(TOP_N, "price_num")[["title", "price_num", "link", "location", "condition"]]
-for _, row in top_expensive.iterrows():
+top_cheapest = df.nsmallest(TOP_N, "price_num")[["title", "price_num", "link", "location", "condition"]]
+for _, row in top_cheapest.iterrows():
     print(f"{row['price_num']:>10,} ֏  {row['title'][:120]}")
     print(f"Ссылка на объявление: {row['link']} | Состояние: {row['condition']} | Локация: {row['location']}")
 print()
@@ -78,6 +78,7 @@ print()
 # График - Гистограмма цен
 plt.figure(figsize=(10, 6))
 plt.hist(df["price_num"], bins=30, color="blue", edgecolor="black")
+plt.title("Распределение цен на видеокарты")
 plt.xlabel("Цена (драм)")
 plt.ylabel("Количество объявлений")
 plt.grid(axis="y", alpha=0.3)
