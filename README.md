@@ -100,6 +100,9 @@
 ## 📊 Пример вывода `price_ranges.png`
 ![price_ranges.png](charts/price_ranges.png)
 
+## 📊 Пример вывода `condition_pie.png`
+![condition_pie.png](charts/condition_pie.png)
+
 ## 🗺 Планы по развитию
 
 - [x] Базовый парсер на Selenium с обходом Cloudflare
