@@ -9,9 +9,25 @@ TOP_N = 10
 
 os.makedirs(CHARTS_DIR, exist_ok=True)
 
+# Курсы валютной конвертации (актуально на 21.09.2026)
+USD_TO_AMD = 363.44
+EUR_TO_AMD = 417.05
+RUB_TO_AMD = 4.31
+
 # Функция перевода числа из строкового типа в целочисленный
 def parse_price(value):
-    number = int(''.join(filter(str.isdigit, value)))
+    if pd.isna(value):
+        return None
+    digits = ''.join(filter(str.isdigit, value))
+    if not digits:
+        return None
+    number = int(digits)
+    if "$" in value:
+        return number * USD_TO_AMD
+    if "€" in value:
+        return number * EUR_TO_AMD
+    if "₽" in value:
+        return number * RUB_TO_AMD
     return number
 
 # Читаем наш csv файл
