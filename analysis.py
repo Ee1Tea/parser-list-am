@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import os
+from matplotlib.ticker import FuncFormatter
 
 # Настройки
 INPUT = "list.csv"
@@ -74,3 +75,16 @@ for cond, count in condition_counts.items():
     print(f"{cond:<30} {count}")
 print()
 
+# График - Гистограмма цен
+plt.figure(figsize=(10, 6))
+plt.hist(df["price_num"], bins=30, color="blue", edgecolor="black")
+plt.xlabel("Цена (драм)")
+plt.ylabel("Количество объявлений")
+plt.grid(axis="y", alpha=0.3)
+plt.gca().xaxis.set_major_formatter(
+    FuncFormatter(lambda x, _: f"{int(x):,}".replace(",", " "))
+)
+plt.tight_layout()
+plt.savefig(f"{CHARTS_DIR}/price_hist.png", dpi=100)
+plt.close()
+print(f"Файл {CHARTS_DIR}/price_hist.png успешно сохранён")
