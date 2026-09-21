@@ -82,9 +82,25 @@ plt.xlabel("Цена (драм)")
 plt.ylabel("Количество объявлений")
 plt.grid(axis="y", alpha=0.3)
 plt.gca().xaxis.set_major_formatter(
-    FuncFormatter(lambda x, _: f"{int(x):,}".replace(",", " "))
-)
+    FuncFormatter(lambda x, _: f"{int(x):,}".replace(",", " ")))
 plt.tight_layout()
 plt.savefig(f"{CHARTS_DIR}/price_hist.png", dpi=100)
 plt.close()
 print(f"Файл {CHARTS_DIR}/price_hist.png успешно сохранён")
+
+# График - Диаграмма распределения цен по ценовым категориям
+bins = [0, 100_000, 250_000, 500_000, float("inf")]
+labels = ["до 100k", "100k–250k", "250k–500k", "500k+"]
+df["price_range"] = pd.cut(df["price_num"], bins=bins, labels=labels, right=False)
+range_counts = df["price_range"].value_counts().reindex(labels)
+plt.figure(figsize=(10, 6))
+plt.bar(range_counts.index, range_counts.values, color="blue", edgecolor="black")
+plt.title("Распределение видеокарт по ценовым категориям")
+plt.xlabel("Цена (драм)")
+plt.ylabel("Количество объявлений")
+plt.grid(axis="y", alpha=0.3)
+for i, v in enumerate(range_counts.values):
+    plt.text(i, v + 2, str(v), ha="center", fontweight="bold")
+plt.tight_layout()
+plt.savefig(f"{CHARTS_DIR}/price_ranges.png", dpi=100)
+plt.close()
