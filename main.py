@@ -13,7 +13,7 @@ OUTPUT = "list.csv" # Файл вывода данных
 def parse_link(browser):
     contentr = browser.find_element(By.ID, "contentr")
     all_dls = contentr.find_elements(By.CSS_SELECTOR, "div.dl")
-    main_block = all_dls[1] # Выбираем основной блок объявлений, откидывая рекламные
+    main_block = all_dls[-1] # Выбираем основной блок объявлений, откидывая рекламные
     elements = main_block.find_elements(By.CLASS_NAME, "category-data-list-grid-card__destination")
     page_data = [] # Список элементов со страницы
     for element in elements:
@@ -54,13 +54,13 @@ browser.quit()
 
 #Вывод информации о повторяющихся объявлениях
 unique_data = list({item["link"]: item for item in all_data}.values())
-print(f"🗑 Удалено дублей: {len(all_data) - len(unique_data)}")
+print(f"❌ Удалено дублей: {len(all_data) - len(unique_data)}")
 print(f"✅ Уникальных: {len(unique_data)}")
 
 
-with open('list.csv', 'w', newline="", encoding="utf-8-sig") as outfile:
+with open(OUTPUT, 'w', newline="", encoding="utf-8-sig") as outfile:
     writer = csv.DictWriter(outfile, fieldnames=["title", "price", "condition", "location", "link"], delimiter=";")
     writer.writeheader()
     writer.writerows(unique_data)
 
-print(f"\n✅ Сохранено {len(unique_data)} записей в list.csv")
+print(f"\n✅ Сохранено {len(unique_data)} записей в {OUTPUT}")
