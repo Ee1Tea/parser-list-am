@@ -63,13 +63,13 @@ for _, row in top_expensive.iterrows():
     print(f"Ссылка на объявление: {row['link']} | Состояние: {row['condition']} | Локация: {row['location']}")
 print()
 
-print("РАСПРЕДЕЛЕНИЕ ПО ЛОКАЦИЯМ")
+print("📊 РАСПРЕДЕЛЕНИЕ ПО ЛОКАЦИЯМ")
 location_counts = df["location"].value_counts()
 for loc, count in location_counts.items():
     print(f"{loc:<30} {count}")
 print()
 
-print("РАСПРЕДЕЛЕНИЕ ПО СОСТОЯНИЮ")
+print("📊 РАСПРЕДЕЛЕНИЕ ПО СОСТОЯНИЮ")
 condition_counts = df["condition"].value_counts()
 for cond, count in condition_counts.items():
     print(f"{cond:<30} {count}")
@@ -104,3 +104,20 @@ for i, v in enumerate(range_counts.values):
 plt.tight_layout()
 plt.savefig(f"{CHARTS_DIR}/price_ranges.png", dpi=100)
 plt.close()
+print(f"Файл {CHARTS_DIR}/price_ranges.png успешно сохранён")
+
+# График - секторная диаграмма состояния видеокарты Новое/Использованное
+plt.figure(figsize=(8, 8))
+plt.pie(
+    condition_counts.values,
+    labels=condition_counts.index,
+    autopct="%1.1f%%",
+    colors=["green", "orange"],
+    startangle=90,
+    textprops={"fontsize": 12},
+)
+plt.title("Распределение видеокарт по состоянию", fontsize=14)
+plt.tight_layout()
+plt.savefig(f"{CHARTS_DIR}/condition_pie.png", dpi=100)
+plt.close()
+print(f"Файл {CHARTS_DIR}/condition_pie.png успешно сохранён")
